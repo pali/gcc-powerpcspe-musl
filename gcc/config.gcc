@@ -2504,6 +2504,13 @@ powerpc*-*-linux*spe*)
 	tm_file="${tm_file} powerpcspe/linux.h glibc-stdint.h"
 	tmake_file="${tmake_file} powerpcspe/t-ppcos powerpcspe/t-linux"
 	tm_file="${tm_file} powerpcspe/linuxspe.h powerpcspe/e500.h"
+	case ${target} in
+		*-linux*-musl*)
+		enable_secureplt=yes ;;
+	esac
+		if test x${enable_secureplt} = xyes; then
+		tm_file="powerpcspe/secureplt.h ${tm_file}"
+	fi
 	;;
 powerpc*-*-linux*)
 	tm_file="${tm_file} dbxelf.h elfos.h gnu-user.h freebsd-spec.h rs6000/sysv4.h"
